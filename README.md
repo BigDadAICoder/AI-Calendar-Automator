@@ -18,6 +18,7 @@ This project implements a fully automated, two-account system within the Google 
 ## How It Works ⚙️
 The system uses a two-account architecture for a clean and robust separation of tasks.
 
+```mermaid
 graph TD
     subgraph "Mail B: The Forwarder Account"
         A[📧 Incoming Event Invitation] --> B(Forwarder.gs Script);
