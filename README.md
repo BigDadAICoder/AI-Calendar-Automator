@@ -17,18 +17,23 @@ This project implements a fully automated, two-account system within the Google 
 
 ## How It Works ⚙️
 The system uses a two-account architecture for a clean and robust separation of tasks.
-
 ```mermaid
 graph TD
-    subgraph "Mail B: The Forwarder Account"
-        A[📧 Incoming Event Invitation] --> B(Forwarder.gs Script);
-        B -- "1. Identifies valid invite<br/>2. De-duplicates using 'Event Fingerprint'<br/>3. Forwards to Primary Account" --> C;
+    subgraph "Mail B: Forwarder Account (Public)"
+        B_SCRIPT["<b>Forwarder.gs Script</b><br/>1. Identifies Invite using smart search<br/>2. De-duplicates via 'Event Fingerprint'<br/>3. Forwards email to Mail A"]
     end
 
-    subgraph "Mail A: The Processor Account"
-        C[📨 Forwarded Email Arrives] --> D(Processor.gs Script);
-        D -- "1. Parses email with Gemini API<br/>2. Categorizes event (e.g., MBA)<br/>3. Creates formatted calendar event" --> E[🗓️ Final Event on Your Main Calendar];
+    subgraph "Mail A: Processor Account (Private)"
+        C_SCRIPT["<b>Processor.gs Script</b><br/>1. Receives and parses email<br/>2. Calls Gemini API for analysis<br/>3. Formats details & sets color<br/>4. Creates calendar event"]
     end
+
+    A[Incoming<br/>Event Invitation] --> B_SCRIPT
+    B_SCRIPT -- "Forwarded Email" --> C_SCRIPT
+    C_SCRIPT --> D{Final<br/>Calendar Event}
+
+    style B_SCRIPT fill:#e3f2fd,stroke:#333,stroke-width:2px
+    style C_SCRIPT fill:#e8f5e9,stroke:#333,stroke-width:2px
+```
 
 ---
 
