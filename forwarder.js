@@ -13,7 +13,7 @@ function createEventFingerprint(subject, body) {
 function autoForwardInvitations() {
   const primaryEmail = 'YOUR_PRIMARY_EMAIL@gmail.com'; // <-- IMPORTANT: Replace with your primary email address
   const processedEventsLog = PropertiesService.getScriptProperties();
-  const searchQuery = '{(subject:"Reminder:") (subject:"Confirmed") "Thank you for registering" "You are registered" "look forward to meeting you at" "event details are as follows" "starts tomorrow"} -{"Register Now" "Register Here" "Learn More & Register" "You\'re Invited"}';
+  const searchQuery = '{(subject:"Reminder:") (subject:"Confirmed") "Thank you for registering" "You are registered" "virtual session" "webinar" "Ask Me Anything" tomorrow "excited to see you at" "Your confirmation number is"} -{"Sign up" "Register Now" "Register Here" "Learn More" "upcoming events" "event calendar" "Apply to" "application deadline" "Save Your Spot" "Reserve my Spot" subject:Invite}';
 
   let forwardedCount = 0;
   const threads = GmailApp.search(searchQuery);
